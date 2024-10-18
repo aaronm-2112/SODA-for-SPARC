@@ -43,7 +43,8 @@ jobs:
         run: npm install --ignore-scripts
 
       - name: Build the app
-
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
         run: |
           npm run build:win
 
