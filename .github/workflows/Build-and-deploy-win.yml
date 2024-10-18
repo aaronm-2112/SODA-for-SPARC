@@ -48,7 +48,7 @@ jobs:
         run: |
           npm run build:win
 
-      - name: Upload Release Asset - exe
+      - name: Upload Release Asset - exe thing again
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         uses: actions/upload-release-asset@v1
