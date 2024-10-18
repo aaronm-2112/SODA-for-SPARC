@@ -48,12 +48,23 @@ jobs:
         run: |
           npm run build:win
 
+      - name: Create Draft Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          tag_name: v15.4.1-beta
+          release_name: "Release v15.4.1-beta"
+          draft: true
+          prerelease: false
+
       - name: Upload Release Asset - exe thing again
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         uses: actions/upload-release-asset@v1
         with:
-          upload_url: ${{ github.event.release.upload_url }}
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./dist/soda-for-sparc-15.4.1-beta.exe
           asset_name: SODA-for-SPARC-15.4.1-beta.exe
           asset_content_type: application/octet-stream
