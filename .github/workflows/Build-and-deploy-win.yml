@@ -42,8 +42,17 @@ jobs:
       - name: Install package.json modules and their dependencies
         run: npm install --ignore-scripts
 
-      - name: Deploy the app to GitHub
+      - name: Build the app
+
+        run: |
+          npm run build-win
+
+      - name: Upload Release Asset - exe
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        run: |
-          npm run deploy-win
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./dist/soda-for-sparc-15.4.1-beta.exe
+          asset_name: SODA-for-SPARC-15.4.1-beta.exe
+          asset_content_type: application/octet-stream
