@@ -65,6 +65,11 @@ jobs:
           timestamp-rfc3161: http://timestamp.acs.microsoft.com
           timestamp-digest: SHA256
 
+      - name: Generate blockmap and latest.yml
+        run: |
+          npx electron-builder blockmap --input="dist/soda-for-sparc-${{env.VERSION}}-setup.exe"
+        working-directory: ${{ github.workspace }}
+
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
@@ -82,7 +87,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}\dist\soda-for-sparc-${{env.VERSION}}-setup.exe
+          asset_path: ${{ github.workspace }}/dist/soda-for-sparc-${{env.VERSION}}-setup.exe
           asset_name: soda-for-sparc-${{env.VERSION}}-setup.exe
           asset_content_type: application/octet-stream
 
@@ -92,7 +97,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}\dist\soda-for-sparc-${{env.VERSION}}-setup.exe.blockmap
+          asset_path: ${{ github.workspace }}/dist/soda-for-sparc-${{env.VERSION}}-setup.exe.blockmap
           asset_name: soda-for-sparc-${{env.VERSION}}-setup.exe.blockmap
           asset_content_type: application/octet-stream
 
@@ -102,6 +107,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}\dist\latest.yml
+          asset_path: ${{ github.workspace }}/dist/latest.yml
           asset_name: latest.yml
           asset_content_type: application/octet-stream
