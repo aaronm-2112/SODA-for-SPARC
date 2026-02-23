@@ -65,9 +65,10 @@ jobs:
           timestamp-rfc3161: http://timestamp.acs.microsoft.com
           timestamp-digest: SHA256
 
-      - name: Generate blockmap and latest.yml
+      - name: Update latest.yml checksum
         run: |
-          npx electron-builder generate-update-info dist/soda-for-sparc-${{env.VERSION}}-setup.exe
+          npm install js-yaml --no-save
+          node tools/update-latest-yml.js dist/soda-for-sparc-${{env.VERSION}}-setup.exe dist/latest.yml
 
       - name: Create GitHub Release
         id: create_release
