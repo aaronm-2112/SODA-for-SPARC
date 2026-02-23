@@ -67,8 +67,7 @@ jobs:
 
       - name: Generate blockmap and latest.yml
         run: |
-          npx electron-builder blockmap --input="dist/soda-for-sparc-${{env.VERSION}}-setup.exe"
-        working-directory: ${{ github.workspace }}
+          npx electron-builder generate-update-info dist/soda-for-sparc-${{env.VERSION}}-setup.exe
 
       - name: Create GitHub Release
         id: create_release
