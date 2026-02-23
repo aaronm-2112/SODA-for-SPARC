@@ -31,13 +31,13 @@ const sha512 = getSha512(installerPath);
 const size = getFileSize(installerPath);
 
 // Read and update latest.yml
-type LatestYml = {
-  version: string;
-  files: Array<{ url: string; sha512: string; size: number }>;
-  path: string;
-  sha512: string;
-  releaseDate: string;
-};
+// type LatestYml = {
+//   version: string;
+//   files: Array<{ url: string; sha512: string; size: number }>;
+//   path: string;
+//   sha512: string;
+//   releaseDate: string;
+// };
 
 const latestYml = yaml.load(fs.readFileSync(latestYmlPath, 'utf8'));
 
